@@ -1,0 +1,34 @@
+{
+  "name": "custom-element",
+  "version": "0.1.1",
+  "description": "Light wrapper for creating custom element prototypes",
+  "main": "index.js",
+  "scripts": {
+    "test": "beefy test.js --open"
+  },
+  "author": "",
+  "license": "private",
+  "publishConfig": {
+    "registry": "http://localhost:8889/"
+  },
+  "devDependencies": {
+    "polyfill-webcomponents": "*",
+    "tape": "~2.3.2",
+    "domify": "~1.1.1"
+  },
+  "dependencies": {
+    "at-path": "0.0.2",
+    "clone": "~0.1.11",
+    "sliced": "0.0.5",
+    "uuid": "^1.4.1"
+  },
+  "peerDependencies": {
+    "polyfill-webcomponents": "*"
+  },
+  "keywords": [
+    "custom",
+    "element",
+    "web",
+    "components"
+  ]
+}
