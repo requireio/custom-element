@@ -17,7 +17,7 @@
     "domify": "~1.1.1"
   },
   "dependencies": {
-    "at-path": "0.0.2",
+    "dotty": "0.0.2",
     "clone": "~0.1.11",
     "sliced": "0.0.5",
     "uuid": "^1.4.1"
