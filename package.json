@@ -6,11 +6,12 @@
   "scripts": {
     "test": "beefy test.js --open"
   },
-  "author": "",
-  "license": "private",
-  "publishConfig": {
-    "registry": "http://localhost:8889/"
-  },
+  "author": "require.io (http://require.io/) <whoa@require.io>",
+  "contributors": [
+    "Tim Oxley",
+    "Hugh Kennedy (http://hughsk.io/) <hughskennedy@gmail.com>"
+  ],
+  "license": "MIT",
   "devDependencies": {
     "polyfill-webcomponents": "*",
     "tape": "~2.3.2",
@@ -21,9 +22,6 @@
     "clone": "~0.1.11",
     "sliced": "0.0.5",
     "uuid": "^1.4.1"
-  },
-  "peerDependencies": {
-    "polyfill-webcomponents": "*"
   },
   "keywords": [
     "custom",
