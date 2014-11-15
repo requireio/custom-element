@@ -4,7 +4,7 @@
   "description": "Light wrapper for creating custom element prototypes",
   "main": "index.js",
   "scripts": {
-    "start": "beefy test.js --open",
+    "start": "beefy test.js",
     "test": "browserify test.js | smokestack --browser chrome | tap-spec"
   },
   "author": "require.io (http://require.io/) <whoa@require.io>",
