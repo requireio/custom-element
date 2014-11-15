@@ -16,15 +16,15 @@ function createCustom(proto) {
   var CustomHTMLElement = Object.create(proto)
   var listeners = CustomHTMLElement.listeners = clone(CustomHTMLElement.listeners || {})
 
-  CustomHTMLElement.attributeChangedCallback = when('attribute')
-  CustomHTMLElement.detachedCallback = when('detach')
-  CustomHTMLElement.attachedCallback = when('attach')
-  CustomHTMLElement.createdCallback = when('created')
+  CustomHTMLElement.attributeChangedCallback = on('attribute')
+  CustomHTMLElement.detachedCallback = on('detached')
+  CustomHTMLElement.attachedCallback = on('attached')
+  CustomHTMLElement.createdCallback = on('created')
 
   var onceKey  = '__once__' + uuid()
   var onces    = 0
   var exported = {
-      when: listenWhen
+      on: listen
     , once: listenOnce
     , prototype: CustomHTMLElement
     , use: use
@@ -32,7 +32,7 @@ function createCustom(proto) {
 
   return exported
 
-  function when(key) {
+  function on(key) {
     return function() {
       var self = this
       var args = slice(arguments)
@@ -51,7 +51,7 @@ function createCustom(proto) {
     return exported
   }
 
-  function listenWhen(key, listener) {
+  function listen(key, listener) {
     listeners[key] = listeners[key] || []
     listeners[key].push(listener)
     return exported
@@ -65,7 +65,7 @@ function createCustom(proto) {
   function listenOnce(key, listener) {
     var hasEmitted = onceKey + onces++
 
-    return listenWhen(key, function() {
+    return listen(key, function() {
       if (this[hasEmitted]) return
 
       this[hasEmitted] = true

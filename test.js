@@ -16,7 +16,7 @@ test('custom prototype', function(t) {
   var proto = Object.create(HTMLTemplateElement.prototype)
 
   document.register(name, createCustom(proto)
-  .when('created', function() {
+  .on('created', function() {
     t.pass('element created was called')
   }))
 
@@ -29,25 +29,25 @@ test('custom prototype extending existing custom element fires both element hand
   t.plan(8)
 
   var superElement = createCustom()
-  .when('created', function() {
+  .on('created', function() {
     t.pass('super element created was called')
   })
-  .when('attach', function() {
-    t.pass('super element attach was called')
+  .on('attached', function() {
+    t.pass('super element attached was called')
   })
-  .once('attach', function() {
-    t.pass('super element attach once was called')
+  .once('attached', function() {
+    t.pass('super element attached once was called')
   })
 
   var inhertingElement = createCustom(superElement.prototype)
-  .when('created', function() {
+  .on('created', function() {
     t.pass('inheriting element created was called')
   })
-  .when('attach', function() {
-    t.pass('inheriting element attach was called')
+  .on('attached', function() {
+    t.pass('inheriting element attached was called')
   })
-  .once('attach', function() {
-    t.pass('inheriting element attach once was called')
+  .once('attached', function() {
+    t.pass('inheriting element attached once was called')
   })
 
   document.register(name, inhertingElement)
@@ -65,41 +65,41 @@ test('custom prototype extending existing custom element fires both element hand
   })
 })
 
-test('when("created")', function(t) {
+test('on("created")', function(t) {
   var name = generateName()
   t.plan(1)
 
-  document.register(name, createCustom().when("created", function() {
+  document.register(name, createCustom().on("created", function() {
     t.pass('element created was called')
   }))
 
   document.createElement(name)
 })
 
-test('when("created") and factory', function(t) {
+test('on("created") and factory', function(t) {
   var name = generateName()
   t.plan(2)
 
   document.register(name, createCustom()
-  .when('created', function() {
+  .on('created', function() {
     t.pass('element created was called')
-  }).when("created", function() {
-    t.pass('element when created was called')
+  }).on("created", function() {
+    t.pass('element on created was called')
   }))
 
   document.createElement(name)
 })
 
-test('when("attach")', function(t) {
+test('on("attached")', function(t) {
   var name = generateName()
   var attached = false
 
   t.plan(2)
 
   document.register(name, createCustom()
-  .when('created', function() {
+  .on('created', function() {
     t.pass('element constructor was called')
-  }).when('attach', function() {
+  }).on('attached', function() {
     t.ok(attached, 'event triggered after being added to DOM')
   }))
 
@@ -111,16 +111,16 @@ test('when("attach")', function(t) {
   })
 })
 
-test('when("detach")', function(t) {
+test('on("detached")', function(t) {
   var name = generateName()
   var attached = true
 
   t.plan(2)
 
   document.register(name, createCustom()
-  .when('created', function() {
+  .on('created', function() {
     t.pass('element constructor was called')
-  }).when('detach', function() {
+  }).on('detached', function() {
     t.ok(!attached, 'event triggered after being removed from DOM')
   }))
 
@@ -132,15 +132,15 @@ test('when("detach")', function(t) {
   })
 })
 
-test('when("attribute")', function(t) {
+test('on("attribute")', function(t) {
   var name = generateName()
 
   t.plan(3)
 
   document.register(name, createCustom()
-  .when('created', function() {
+  .on('created', function() {
     t.pass('element constructor was called')
-  }).when('attribute', function(name, _, value) {
+  }).on('attribute', function(name, _, value) {
     t.equal(name, 'hello', 'correct attribute name passed to listener')
     t.equal(value, 'world', 'correct attribute value passed to listener')
   }))
@@ -156,12 +156,12 @@ test('inherits from parent custom-element prototypes', function(t) {
   t.plan(3)
 
   var parent = createCustom()
-    .when('created', function() {
+    .on('created', function() {
       t.pass('parent created callback is called')
     })
 
   var child = createCustom(parent.prototype)
-    .when('created', function() {
+    .on('created', function() {
       t.pass('child created callback is called')
     })
 
@@ -179,11 +179,11 @@ test('once', function(t) {
   var count = 0
   var total = 0
   document.register(name, createCustom()
-  .when('created', function() {
+  .on('created', function() {
     t.pass('element constructor was called')
-  }).when('attach', function() {
+  }).on('attached', function() {
     total += 1
-  }).once('attach', function() {
+  }).once('attached', function() {
     t.equal(++count, 1)
   }))
 
@@ -214,11 +214,11 @@ test('once (per instance, not per class)', function(t) {
   var count = 0
   var total = 0
   document.register(name, createCustom()
-  .when('created', function() {
+  .on('created', function() {
     t.pass('element constructor was called')
-  }).when('attach', function() {
+  }).on('attached', function() {
     total += 1
-  }).once('attach', function() {
+  }).once('attached', function() {
     count += 1
   }))
 
