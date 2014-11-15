@@ -7,7 +7,7 @@ var slice = require('sliced')
 var clone = require('clone')
 var uuid = require('uuid')
 
-var noop = (function(){})
+function noop(){}
 
 module.exports = createCustom
 
