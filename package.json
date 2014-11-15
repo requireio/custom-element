@@ -7,10 +7,10 @@
     "start": "beefy test.js",
     "test": "browserify test.js | smokestack --browser chrome | tap-spec"
   },
-  "author": "require.io (http://require.io/) <whoa@require.io>",
+  "author": "Hugh Kennedy <hughskennedy@gmail.com>",
   "contributors": [
-    "Tim Oxley",
-    "Hugh Kennedy (http://hughsk.io/) <hughskennedy@gmail.com>"
+    "Tim Oxley <secoif@gmail.com>",
+    "Hugh Kennedy <hughskennedy@gmail.com> (http://hughsk.io/)"
   ],
   "license": "MIT",
   "devDependencies": {
@@ -31,6 +31,15 @@
     "custom",
     "element",
     "web",
-    "components"
-  ]
+    "components",
+    "browser"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/requireio/custom-element.git"
+  },
+  "bugs": {
+    "url": "https://github.com/requireio/custom-element/issues"
+  },
+  "homepage": "https://github.com/requireio/custom-element"
 }
