@@ -246,3 +246,8 @@ test('once (per instance, not per class)', function(t) {
     })
   })
 })
+
+test('shutdown', function(t) {
+  t.end()
+  window.close()
+})

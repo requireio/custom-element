@@ -4,7 +4,8 @@
   "description": "Light wrapper for creating custom element prototypes",
   "main": "index.js",
   "scripts": {
-    "test": "beefy test.js --open"
+    "start": "beefy test.js --open",
+    "test": "browserify test.js | smokestack --browser chrome | tap-spec"
   },
   "author": "require.io (http://require.io/) <whoa@require.io>",
   "contributors": [
@@ -13,9 +14,12 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "browserify": "~6.3.2",
+    "domify": "~1.1.1",
     "polyfill-webcomponents": "*",
-    "tape": "~2.3.2",
-    "domify": "~1.1.1"
+    "smokestack": "~2.0.0",
+    "tap-spec": "~1.0.1",
+    "tape": "~2.3.2"
   },
   "dependencies": {
     "clone": "~0.1.11",
