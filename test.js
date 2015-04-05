@@ -67,9 +67,9 @@ test('custom prototype extending existing custom-element fires both element hand
 
 test('custom prototype extending existing vanilla custom element fires both element handlers', function(t) {
   var name = generateName()
-  t.plan(7)
+  t.plan(5)
 
-  var superElement = Object.create(window.HTMLUnknownElement.prototype)
+  var superElement = Object.create(window.HTMLUnknownElement)
 
   superElement.createdCallback = function() {
     t.pass('super element created was called')
@@ -79,12 +79,9 @@ test('custom prototype extending existing vanilla custom element fires both elem
     t.pass('super element attached was called')
   }
 
-  var inhertingElement = createCustom(superElement.prototype)
+  var inhertingElement = createCustom(superElement)
   .on('created', function() {
     t.pass('inheriting element created was called')
-  })
-  .on('attached', function() {
-    t.pass('inheriting element attached was called')
   })
   .once('attached', function() {
     t.pass('inheriting element attached once was called')
