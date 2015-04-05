@@ -24,7 +24,7 @@ test('custom prototype', function(t) {
   t.ok(el instanceof HTMLTemplateElement)
 })
 
-test('custom prototype extending existing custom element fires both element handlers', function(t) {
+test('custom prototype extending existing custom-element fires both element handlers', function(t) {
   var name = generateName()
   t.plan(8)
 
@@ -51,6 +51,46 @@ test('custom prototype extending existing custom element fires both element hand
   })
 
   document.register(name, inhertingElement)
+
+  var el = document.createElement(name)
+  document.body.appendChild(el)
+  process.nextTick(function() {
+    document.body.removeChild(el)
+    process.nextTick(function() {
+      document.body.appendChild(el)
+      process.nextTick(function() {
+        document.body.removeChild(el)
+      })
+    })
+  })
+})
+
+test('custom prototype extending existing vanilla custom element fires both element handlers', function(t) {
+  var name = generateName()
+  t.plan(7)
+
+  var superElement = Object.create(window.HTMLUnknownElement.prototype)
+
+  superElement.createdCallback = function() {
+    t.pass('super element created was called')
+  }
+
+  superElement.attachedCallback = function() {
+    t.pass('super element attached was called')
+  }
+
+  var inhertingElement = createCustom(superElement.prototype)
+  .on('created', function() {
+    t.pass('inheriting element created was called')
+  })
+  .on('attached', function() {
+    t.pass('inheriting element attached was called')
+  })
+  .once('attached', function() {
+    t.pass('inheriting element attached once was called')
+  })
+
+  document.registerElement(name, inhertingElement)
 
   var el = document.createElement(name)
   document.body.appendChild(el)
