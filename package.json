@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "clone": "~0.1.11",
+    "es6-symbol": "^2.0.1",
     "sliced": "0.0.5",
     "uuid": "~2.0.1"
   },

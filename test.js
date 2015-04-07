@@ -24,7 +24,7 @@ test('custom prototype', function(t) {
   t.ok(el instanceof HTMLTemplateElement)
 })
 
-test('custom prototype extending existing custom element fires both element handlers', function(t) {
+test('custom prototype extending existing custom-element fires both element handlers', function(t) {
   var name = generateName()
   t.plan(8)
 
@@ -45,6 +45,43 @@ test('custom prototype extending existing custom element fires both element hand
   })
   .on('attached', function() {
     t.pass('inheriting element attached was called')
+  })
+  .once('attached', function() {
+    t.pass('inheriting element attached once was called')
+  })
+
+  document.registerElement(name, inhertingElement)
+
+  var el = document.createElement(name)
+  document.body.appendChild(el)
+  process.nextTick(function() {
+    document.body.removeChild(el)
+    process.nextTick(function() {
+      document.body.appendChild(el)
+      process.nextTick(function() {
+        document.body.removeChild(el)
+      })
+    })
+  })
+})
+
+test('custom prototype extending existing vanilla custom element fires both element handlers', function(t) {
+  var name = generateName()
+  t.plan(5)
+
+  var superElement = Object.create(window.HTMLUnknownElement)
+
+  superElement.createdCallback = function() {
+    t.pass('super element created was called')
+  }
+
+  superElement.attachedCallback = function() {
+    t.pass('super element attached was called')
+  }
+
+  var inhertingElement = createCustom(superElement)
+  .on('created', function() {
+    t.pass('inheriting element created was called')
   })
   .once('attached', function() {
     t.pass('inheriting element attached once was called')
