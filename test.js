@@ -1,4 +1,4 @@
-require('polyfill-webcomponents')
+require('webcomponents.js')
 
 var createCustom = require('./')
 var domify = require('domify')
@@ -15,7 +15,7 @@ test('custom prototype', function(t) {
 
   var proto = Object.create(HTMLTemplateElement.prototype)
 
-  document.register(name, createCustom(proto)
+  document.registerElement(name, createCustom(proto)
   .on('created', function() {
     t.pass('element created was called')
   }))
@@ -50,7 +50,7 @@ test('custom prototype extending existing custom element fires both element hand
     t.pass('inheriting element attached once was called')
   })
 
-  document.register(name, inhertingElement)
+  document.registerElement(name, inhertingElement)
 
   var el = document.createElement(name)
   document.body.appendChild(el)
@@ -69,7 +69,7 @@ test('on("created")', function(t) {
   var name = generateName()
   t.plan(1)
 
-  document.register(name, createCustom().on("created", function() {
+  document.registerElement(name, createCustom().on("created", function() {
     t.pass('element created was called')
   }))
 
@@ -80,7 +80,7 @@ test('on("created") and factory', function(t) {
   var name = generateName()
   t.plan(2)
 
-  document.register(name, createCustom()
+  document.registerElement(name, createCustom()
   .on('created', function() {
     t.pass('element created was called')
   }).on("created", function() {
@@ -96,7 +96,7 @@ test('on("attached")', function(t) {
 
   t.plan(2)
 
-  document.register(name, createCustom()
+  document.registerElement(name, createCustom()
   .on('created', function() {
     t.pass('element constructor was called')
   }).on('attached', function() {
@@ -117,7 +117,7 @@ test('on("detached")', function(t) {
 
   t.plan(2)
 
-  document.register(name, createCustom()
+  document.registerElement(name, createCustom()
   .on('created', function() {
     t.pass('element constructor was called')
   }).on('detached', function() {
@@ -137,7 +137,7 @@ test('on("attribute")', function(t) {
 
   t.plan(3)
 
-  document.register(name, createCustom()
+  document.registerElement(name, createCustom()
   .on('created', function() {
     t.pass('element constructor was called')
   }).on('attribute', function(name, _, value) {
@@ -165,8 +165,8 @@ test('inherits from parent custom-element prototypes', function(t) {
       t.pass('child created callback is called')
     })
 
-  document.register(name1, parent)
-  document.register(name2, child)
+  document.registerElement(name1, parent)
+  document.registerElement(name2, child)
   document.createElement(name1)
   document.createElement(name2)
 
@@ -178,7 +178,7 @@ test('once', function(t) {
 
   var count = 0
   var total = 0
-  document.register(name, createCustom()
+  document.registerElement(name, createCustom()
   .on('created', function() {
     t.pass('element constructor was called')
   }).on('attached', function() {
@@ -213,7 +213,7 @@ test('once (per instance, not per class)', function(t) {
 
   var count = 0
   var total = 0
-  document.register(name, createCustom()
+  document.registerElement(name, createCustom()
   .on('created', function() {
     t.pass('element constructor was called')
   }).on('attached', function() {

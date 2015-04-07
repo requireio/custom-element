@@ -3,7 +3,7 @@
 Experimental: convenience wrapper for creating custom element prototypes.
 
 ```javascript
-require('polyfill-webcomponents')
+require('webcomponents.js')
 
 var createCustom = require('custom-element')
 
@@ -20,5 +20,5 @@ var CustomHTMLElement = createCustom(function() {
   // Note that values are coerced into strings.
 })
 
-document.register('custom-element', CustomHTMLElement)
+document.registerElement('custom-element', CustomHTMLElement)
 ```
