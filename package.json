@@ -10,7 +10,8 @@
   "author": "Hugh Kennedy <hughskennedy@gmail.com>",
   "contributors": [
     "Tim Oxley <secoif@gmail.com>",
-    "Hugh Kennedy <hughskennedy@gmail.com> (http://hughsk.io/)"
+    "Hugh Kennedy <hughskennedy@gmail.com> (http://hughsk.io/)",
+    "Yoshua Wuyts <i@yoshuawuyts.com> (yoshuawuyts.com)"
   ],
   "license": "MIT",
   "devDependencies": {
