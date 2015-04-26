@@ -286,5 +286,9 @@ test('once (per instance, not per class)', function(t) {
 
 test('shutdown', function(t) {
   t.end()
-  window.close()
+  // delay needed for test to not inexplicably fail
+  // nfi.
+  setTimeout(function() {
+    window.close()
+  }, 100)
 })
